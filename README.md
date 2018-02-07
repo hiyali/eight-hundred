@@ -10,13 +10,14 @@ For eight hundred to do a string compressor
 yarn
 ```
 
-## Build a random string file (64KB)
-build out to `dist/64k_random_string_***time***.txt`
+## Build
+build a random string file (64KB) out to `dist/64k_random_string_***time***.txt`
 ```shell
 npm run build
 ```
 
-## Build a random string file and test some target code with this random string file
+## Build and test
+build a random string file (64KB) and test some target code with this random string file
 ```shell
 npm run build:targetName
 ```
