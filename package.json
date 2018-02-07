@@ -1,0 +1,35 @@
+{
+  "name": "eight-hundred",
+  "version": "1.0.0",
+  "description": "For eight hundred RMB to do a string compressor",
+  "main": "index.js",
+  "scripts": {
+    "build": "node src/babelify.js",
+    "build:salam": "node src/babelify.js --testTarget=salam",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiyali/eight-hundred.git"
+  },
+  "keywords": [
+    "compressor",
+    "ascii",
+    "string"
+  ],
+  "author": "Salam Hiyali",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hiyali/eight-hundred/issues"
+  },
+  "homepage": "https://github.com/hiyali/eight-hundred#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.17.0",
+    "node-color-log": "^2.0.0",
+    "randomatic": "^3.0.0",
+    "yargs": "^11.0.0"
+  }
+}
