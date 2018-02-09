@@ -1,13 +1,16 @@
 import fs from 'fs'
+import { Buffer } from 'buffer'
 
-const saveFileWithArray = (filePath, dataArray) => {
+const saveFileByStream = (filePath, dataStr = '', blockLength = 8 * 1024, options = null) => {
   return new Promise((resolve, reject) => {
-    const stream = fs.createWriteStream(filePath, { encoding: 'utf8' })
+    const stream = fs.createWriteStream(filePath, options)
 
     stream.on('open', () => {
-      let block
-      while (block = dataArray.shift()) {
+      let _blockPos = 0
+      while (_blockPos < dataStr.length) {
+        const block = dataStr.slice(_blockPos, _blockPos + blockLength)
         stream.write(block)
+        _blockPos += blockLength
       }
 
       stream.end()
@@ -18,9 +21,9 @@ const saveFileWithArray = (filePath, dataArray) => {
   })
 }
 
-const readFile = (filePath) => {
+const readFile = (filePath, options = null) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(filePath, { encoding: 'utf-8' }, (err, data) => {
+    fs.readFile(filePath, options, (err, data) => {
       if (err) {
         reject(err)
       } else {
@@ -30,7 +33,28 @@ const readFile = (filePath) => {
   })
 }
 
+const readFileByBuffer = (filePath, bufferLength, mode = 'r') => {
+  return new Promise((resolve, reject) => {
+    fs.open(filePath, mode, (err, fd) => {
+      if (err) {
+        reject(err)
+        return
+      }
+
+      const buffer = new Buffer(bufferLength)
+      fs.read(fd, buffer, 0, bufferLength, 0, (err, num) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve({ buffer, num })
+        }
+      })
+    })
+  })
+}
+
 export {
-  saveFileWithArray,
-  readFile
+  saveFileByStream,
+  readFile,
+  readFileByBuffer
 }

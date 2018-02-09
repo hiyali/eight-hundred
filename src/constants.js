@@ -1,0 +1,17 @@
+const COMPRESS_BIN_WEIGHT = 7
+const FROM_CHAR_CODE = 32
+
+const KB = 1 * 1024
+const FILE_LENGTH = 64 // 64 * KB
+const BUFFER_LENGTH = 16 // 8 * KB
+
+const EXAMPLE_COUNT = 20
+
+export {
+  COMPRESS_BIN_WEIGHT,
+  FROM_CHAR_CODE,
+  KB,
+  EXAMPLE_COUNT,
+  FILE_LENGTH,
+  BUFFER_LENGTH
+}
