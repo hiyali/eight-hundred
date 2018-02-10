@@ -49,14 +49,14 @@ import { saveFileByStream, readFile, readFileByBuffer } from './file.js'
   if (testTarget) {
     Log('Test target name:', testTarget)
     const targetCode = require('./' + testTarget).run
-    // console.log('Target code:', targetCode)
 
     try {
       const data = await readFile(filePath, { encoding: 'utf8' })
-      Log('Received data length:', data.length)
+      Log('Target data length:', data.length)
+      Log('Target data:', data)
       const targetResult = await targetCode(data)
-      // console.log('---------- targetResult\n', targetResult)
       Log(`Test target ${testTarget} result:`, targetResult)
+      await saveFileByStream('dist/' + testTarget + '-extracted-result.txt', targetResult, BUFFER_LENGTH, { encoding: 'utf8' })
     } catch (err) {
       Log('Something went wrong (readFile):', err, {
         titleColor: 'red'
